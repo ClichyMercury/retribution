@@ -1,51 +1,162 @@
 import 'package:flutter/material.dart';
+import 'package:retribution/views/others_informations.dart';
+import 'package:retribution/views/road_state.dart';
 
-class NavigationDrawerWidget extends StatefulWidget {
+class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(horizontal: 20);
-
-  @override
-  State<NavigationDrawerWidget> createState() => _NavigationDrawerWidgetState();
-}
-
-class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Color.fromARGB(255, 65, 112, 187),
+        color: Color.fromRGBO(50, 75, 205, 1),
         child: ListView(
           children: <Widget>[
-            const SizedBox(height: 48),
-            buildMenuItem(text: 'People', icon: Icons.people),
-            const SizedBox(height: 48),
-            buildMenuItem(text: 'Last_Forecast', icon: Icons.reply_all_sharp),
-            const SizedBox(height: 48),
-            buildMenuItem(
-                text: 'Timer_On', icon: Icons.access_time_filled_sharp),
-            const SizedBox(height: 48),
-            buildMenuItem(text: 'Road_state', icon: Icons.garage_rounded),
-            const SizedBox(height: 48),
-            buildMenuItem(
-                text: 'Join_Community', icon: Icons.join_full_outlined),
+            Container(
+              padding: padding,
+              child: Column(
+                children: [
+                  const SizedBox(height: 12),
+                  buildSearchField(),
+                  const SizedBox(height: 24),
+                  buildMenuItem(
+                    text: 'Others Informations',
+                    icon: Icons.info,
+                    onClicked: () => selectedItem(context, 0),
+                  ),
+                  const SizedBox(height: 16),
+                  buildMenuItem(
+                    text: 'Road State',
+                    icon: Icons.car_repair_sharp,
+                    onClicked: () => selectedItem(context, 1),
+                  ),
+                  const SizedBox(height: 16),
+                  buildMenuItem(
+                    text: 'Workflow',
+                    icon: Icons.workspaces_outline,
+                    onClicked: () => selectedItem(context, 2),
+                  ),
+                  const SizedBox(height: 16),
+                  buildMenuItem(
+                    text: 'Updates',
+                    icon: Icons.update,
+                    onClicked: () => selectedItem(context, 3),
+                  ),
+                  const SizedBox(height: 24),
+                  Divider(color: Colors.white70),
+                  const SizedBox(height: 24),
+                  buildMenuItem(
+                    text: 'Plugins',
+                    icon: Icons.account_tree_outlined,
+                    onClicked: () => selectedItem(context, 4),
+                  ),
+                  const SizedBox(height: 16),
+                  buildMenuItem(
+                    text: 'Notifications',
+                    icon: Icons.notifications_outlined,
+                    onClicked: () => selectedItem(context, 5),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-}
 
-Widget buildMenuItem({
-  String? text,
-  IconData? icon,
-  VoidCallback? onCliked, 
-}) {
-  final color = Colors.white;
-  final hoverColor = Colors.white70;
+  Widget buildHeader({
+    required String urlImage,
+    required String name,
+    required String email,
+    required VoidCallback onClicked,
+  }) =>
+      InkWell(
+        onTap: onClicked,
+        child: Container(
+          padding: padding.add(EdgeInsets.symmetric(vertical: 40)),
+          child: Row(
+            children: [
+              CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
+              SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    email,
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                ],
+              ),
+              Spacer(),
+              CircleAvatar(
+                radius: 24,
+                backgroundColor: Color.fromRGBO(30, 60, 168, 1),
+                child: Icon(Icons.add_comment_outlined, color: Colors.white),
+              )
+            ],
+          ),
+        ),
+      );
 
-  return ListTile(
-    leading: Icon(icon, color: color),
-    title: Text(text!, style: TextStyle(color: color)),
-    hoverColor: hoverColor,
-    onTap: () {},
-  );
+  Widget buildSearchField() {
+    final color = Colors.white;
+
+    return TextField(
+      style: TextStyle(color: color),
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        hintText: 'Search',
+        hintStyle: TextStyle(color: color),
+        prefixIcon: Icon(Icons.search, color: color),
+        filled: true,
+        fillColor: Colors.white12,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: color.withOpacity(0.7)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: color.withOpacity(0.7)),
+        ),
+      ),
+    );
+  }
+
+  Widget buildMenuItem({
+    required String text,
+    required IconData icon,
+    VoidCallback? onClicked,
+  }) {
+    final color = Colors.white;
+    final hoverColor = Colors.white70;
+
+    return ListTile(
+      leading: Icon(icon, color: color),
+      title: Text(text, style: TextStyle(color: color)),
+      hoverColor: hoverColor,
+      onTap: onClicked,
+    );
+  }
+
+  void selectedItem(BuildContext context, int index) {
+    Navigator.of(context).pop();
+
+    switch (index) {
+      case 0:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => others_imformations(),
+        ));
+        break;
+      case 1:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => road_state(),
+        ));
+        break;
+    }
+  }
 }

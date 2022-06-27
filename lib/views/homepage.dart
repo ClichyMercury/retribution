@@ -7,6 +7,14 @@ import 'package:retribution/views/current_weather.dart';
 import 'navigation_drawer.dart';
 
 class HomePage extends StatefulWidget {
+  final String? Cityname;
+  final String? CountryID;
+
+  HomePage({
+    Key? key,
+    required this.Cityname,
+    this.CountryID,
+  }) : super(key: key);
   @override
   State<HomePage> createState() => _HomePageState();
 }

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:retribution/views/homepage.dart';
+import 'package:retribution/views/connexion.dart';
 import 'package:flutter/material.dart';
 
 class flashScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class _flashScreenState extends State<flashScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           // ignore: prefer_const_constructors
-          builder: (_) => HomePage(),
+          builder: (_) => MyHomePage(),
         ),
       );
     });

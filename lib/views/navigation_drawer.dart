@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retribution/views/others_informations.dart';
-import 'package:retribution/views/road_state.dart';
+import 'package:retribution/views/weatherMaps.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(horizontal: 20);
@@ -25,8 +25,8 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   buildMenuItem(
-                    text: 'Road State',
-                    icon: Icons.car_repair_sharp,
+                    text: 'Weather Maps',
+                    icon: Icons.location_on_outlined,
                     onClicked: () => selectedItem(context, 1),
                   ),
                   const SizedBox(height: 16),

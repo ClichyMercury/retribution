@@ -152,11 +152,11 @@ class NavigationDrawerWidget extends StatelessWidget {
           builder: (context) => others_imformations(),
         ));
         break;
-      case 1:
+      /* case 1:
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => road_state(),
         ));
-        break;
+        break; */
     }
   }
 }
